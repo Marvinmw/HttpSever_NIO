@@ -1,0 +1,25 @@
+<configuration scan="true">
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date %level [%thread{10}] %logger{20}: %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="ROLLING"
+	class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>logs/server.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/server-%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+			<cleanHistoryOnStart>true</cleanHistoryOnStart>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %level [%thread{10}] %logger{20}: %msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="com.nio" level="debug" />
+	<logger name="org.springframework" level="debug" />
+	<root level="WARN">
+		<appender-ref ref="ROLLING" />
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
